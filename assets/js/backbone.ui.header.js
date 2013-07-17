@@ -15,31 +15,52 @@
 	
 	Backbone.UI.Header = View.extend({
 		
-		el : '.ui-header',
+		el : 'body',
 		
 		options : {
 			// navEl : "nav", 
-			// mainEl : ".main"
+			headerEl : ".top",
+			mainEl : ".main",
+			threshold : 40
 		},
 		
 		events: {
-			"click .ui-header-control": "toggle"
+			"scroll" : "headerScroll",
 		},
 		
-		toggle: function( e ) {
-			e.preventDefault();
-			$(this.el).find('.ui-header-target').toggleClass('ui-element-active');
-		}, 
-		
-		dooSomething: function() {
+		headerScroll: function() {
 			
+			// console.log($(document).scrollTop());
+			
+			if (!$('html').hasClass('touch') ) {
+				
+				
+				
+				    if ($(window).scrollTop() > this.options.threshold) {
+					
+					$( this.options.headerEl ).addClass("hscroll");
+					$( this.options.mainEl ).css("padding-top", "110px");
+				}
+				else {
+					$( this.options.headerEl ).removeClass("hscroll");
+					$( this.options.mainEl ).css("padding-top", "50px");
+				}
+			}
 		},
+		
+		
 		
 		initialize: function(model, options){
 			
-			_.bindAll(this, 'render'); 
+			
+			_.bindAll(this, 'render', 'headerScroll'); 
+			$(window).scroll(this.headerScroll); 
 			
 		},
 	});
 	
 })(this._, this.Backbone);
+
+
+
+
