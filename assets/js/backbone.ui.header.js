@@ -18,49 +18,83 @@
 		el : 'body',
 		
 		options : {
-			// navEl : "nav", 
 			headerEl : ".top",
 			mainEl : ".main",
-			threshold : 40
+			detatch : false,
+			detatchOffset : 0,
+			hide : false,
+			hideDir : "down",
+			// hideOffset : 0,
 		},
 		
 		events: {
-			"scroll" : "headerScroll",
+			// "scroll" : "headerScroll",
 		},
 		
 		headerScroll: function() {
 			
-			// console.log($(document).scrollTop());
+			this.lastScroll = this.lastScroll || 0;
+			// calculate the direction of scroll
 			
-			if (!$('html').hasClass('touch') ) {
+			var scrollTop = $(window).scrollTop();
+			if (scrollTop > this.lastScroll){
+				// downscroll code
+				this.scrollDir = "down";
 				
-				
-				
-				    if ($(window).scrollTop() > this.options.threshold) {
-					
-					$( this.options.headerEl ).addClass("hscroll");
-					$( this.options.mainEl ).css("padding-top", "110px");
+			} else {
+				this.scrollDir = "up";
+			}
+			this.lastScroll = scrollTop;
+		
+			// if plugin option detatch is true
+			if (this.options.detatch) {
+			
+				// check if amount of user scroll is greater than the detatchOffset amount set in options
+				if (scrollTop > this.options.detatchOffset) {
+					$( this.options.headerEl ).addClass("detatch");
 				}
+		
 				else {
-					$( this.options.headerEl ).removeClass("hscroll");
-					$( this.options.mainEl ).css("padding-top", "50px");
+					$( this.options.headerEl ).removeClass("detatch");
+				}
+			}
+			
+			// if plugin option hide is true
+			if (this.options.hide) {
+				
+				// if option direction is down
+				if ( this.options.hideDir == "down" ) {
+					
+					// check if user scroll dir is down and window is not at top
+					if ( (this.scrollDir == "down") && scrollTop > 0 ) {
+						$( this.options.headerEl ).addClass("hide");
+					}
+			
+					else {
+						$( this.options.headerEl ).removeClass("hide");
+					}
+				}
+				
+				// if option direction is up
+				if ( this.options.hideDir == "up" ) {
+					
+					if ( (this.scrollDir == "up") && scrollTop > 0 ) {
+						$( this.options.headerEl ).addClass("hide");
+					}
+			
+					else {
+						$( this.options.headerEl ).removeClass("hide");
+					}
 				}
 			}
 		},
 		
-		
-		
 		initialize: function(model, options){
-			
 			
 			_.bindAll(this, 'render', 'headerScroll'); 
 			$(window).scroll(this.headerScroll); 
-			
-		},
+		
+		}
 	});
 	
 })(this._, this.Backbone);
-
-
-
-
