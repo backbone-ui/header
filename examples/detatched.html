@@ -22,16 +22,17 @@ html, body {
 }
 
 header {
-	background: #fff;
+	/* background-color: rgba(255,255,255,.5); */
+	background-color: transparent;
 	color: #299bc9;
 	height: 60px;
 }
 
 
 header.detatch {
-	height: 60px;
 	background: #fff;
-	color: #299bc9;
+	
+	
 }
 
 ul.nav {
@@ -149,10 +150,9 @@ ul.nav li {
 <script type="text/javascript">
 // instantiate view
 var view = new Backbone.UI.Header({
-			detatch : true,
-			hide : true,
-			
-		});
+	detatch : true,
+	hide : true
+});
 
 </script>
 </body>

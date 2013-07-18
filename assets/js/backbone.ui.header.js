@@ -56,11 +56,13 @@
 					
 					// check if user scroll dir is down and window is not at top
 					if ( (this.scrollDir == "down") && scrollTop > 0 ) {
+						
 						$( this.options.headerEl ).addClass("hide");
-					}
-			
-					else {
+						this.translateTop(-1*$(this.options.headerEl).height());
+						
+					} else {
 						$( this.options.headerEl ).removeClass("hide");
+						this.translateTop();
 					}
 				}
 				
@@ -69,10 +71,11 @@
 					
 					if ( (this.scrollDir == "up") && scrollTop > 0 ) {
 						$( this.options.headerEl ).addClass("hide");
-					}
-			
-					else {
+						this.translateTop(-1*$(this.options.headerEl).height());
+						
+					} else {
 						$( this.options.headerEl ).removeClass("hide");
+						this.translateTop();
 					}
 				}
 			}
@@ -90,7 +93,6 @@
 				}
 			}
 			
-			
 		},
 		
 		initialize: function(model, options){
@@ -98,7 +100,18 @@
 			_.bindAll(this, 'render', 'headerScroll'); 
 			$(window).scroll(this.headerScroll); 
 		
-		}
+		},
+		
+		translateTop: function(pixels){
+			pixels = pixels || 0;
+			$( this.options.headerEl ).css("-webkit-transform", "translate(0,"+ pixels +"px)");
+			$( this.options.headerEl ).css("-moz-transform", "translate(0,"+ pixels +"px)");
+			$( this.options.headerEl ).css("-o-transform", "translate(0,"+ pixels +"px)");
+			$( this.options.headerEl ).css("transform", "translate(0,"+ pixels +"px)");
+			
+		},
+		
+		
 	});
 	
 })(this._, this.Backbone);
