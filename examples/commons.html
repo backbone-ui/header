@@ -21,19 +21,6 @@ html, body {
 	height: 100%;
 }
 
-header {
-	background: #fff;
-	color: #299bc9;
-	height: 60px;
-}
-
-
-header.detatch {
-	height: 60px;
-	background: #fff;
-	color: #299bc9;
-}
-
 ul.nav {
 	list-style-type: none
 }
@@ -150,8 +137,8 @@ ul.nav li {
 // instantiate view
 var view = new Backbone.UI.Header({
 			detatch : true,
-			hide : true,
-			
+			/* hide : false, */
+			detatchOffset : 40,
 		});
 
 </script>
