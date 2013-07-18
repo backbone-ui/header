@@ -46,18 +46,7 @@
 			}
 			this.lastScroll = scrollTop;
 		
-			// if plugin option detatch is true
-			if (this.options.detatch) {
 			
-				// check if amount of user scroll is greater than the detatchOffset amount set in options
-				if (scrollTop > this.options.detatchOffset) {
-					$( this.options.headerEl ).addClass("detatch");
-				}
-		
-				else {
-					$( this.options.headerEl ).removeClass("detatch");
-				}
-			}
 			
 			// if plugin option hide is true
 			if (this.options.hide) {
@@ -87,6 +76,21 @@
 					}
 				}
 			}
+			
+			// if plugin option detatch is true
+			if (this.options.detatch && !$(this.options.headerEl).hasClass("hide")) {
+			
+				// check if amount of user scroll is greater than the detatchOffset amount set in options
+				if (scrollTop > this.options.detatchOffset) {
+					$( this.options.headerEl ).addClass("detatch");
+				}
+		
+				else {
+					$( this.options.headerEl ).removeClass("detatch");
+				}
+			}
+			
+			
 		},
 		
 		initialize: function(model, options){
