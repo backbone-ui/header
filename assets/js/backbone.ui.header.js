@@ -114,9 +114,14 @@
 
 		},
 
-		initialize: function(model, options){
-
+		initialize: function(options){
+			// fallbacks
+			options = options || {};
+			// bindings
 			_.bindAll(this, 'render', 'headerScroll');
+			// extend options
+			this.options = _.extend({}, this.options, options);
+			// events
 			$(window).scroll(this.headerScroll);
 
 		},
