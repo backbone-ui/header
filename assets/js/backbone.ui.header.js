@@ -73,11 +73,11 @@
 					// check if user scroll dir is down and window is not at top
 					if ( (this.scrollDir == "down") && scrollTop > 0 ) {
 
-						$(this.el).addClass("ui-header-hide");
+						$(this.el).addClass("hidden");
 						this.translateTop(-1 * $(this.el).height());
 
 					} else {
-						$(this.el).removeClass("ui-header-hide");
+						$(this.el).removeClass("hidden");
 						this.translateTop();
 					}
 				}
@@ -86,24 +86,24 @@
 				if ( this.options.hideDir == "up" ) {
 
 					if ( (this.scrollDir == "up") && scrollTop > 0 ) {
-						$(this.el).addClass("ui-header-hide");
+						$(this.el).addClass("hidden");
 						this.translateTop(-1* $(this.el).height());
 
 					} else {
-						$(this.el).removeClass("ui-header-hide");
+						$(this.el).removeClass("hidden");
 						this.translateTop();
 					}
 				}
 			}
 
 			// if plugin option detatch is true
-			if (this.options.detatch && !$(this.el).hasClass("ui-header-hide")) {
+			if (this.options.detatch && !$(this.el).hasClass("hidden")) {
 
 				// check if amount of user scroll is greater than the detatchOffset amount set in options
 				if( scrollTop > this.options.detatchOffset ){
-					$(this.el).addClass("detatch");
+					$(this.el).addClass("detatched");
 				} else {
-					$(this.el).removeClass("detatch");
+					$(this.el).removeClass("detatched");
 				}
 			}
 
@@ -119,6 +119,11 @@
 			// events
 			$(window).scroll(this.headerScroll);
 
+		},
+
+		postRender: function(){
+			//
+			if( this.el ) $(this.el).addClass("ui-header");
 		},
 
 		translateTop: function(pixels){
